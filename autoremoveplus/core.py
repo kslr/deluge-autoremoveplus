@@ -76,13 +76,13 @@ def _get_ratio((i, t)):
 
 
 def _date_added((i, t)):
-    return (time.time() - t.time_added) / 86400.0
+    return (time.time() - t.get_status(['time_added'])['time_added']) / 86400.0
 
 
 # Add key label also to get_remove_rules():141
 filter_funcs = {
     'func_ratio': _get_ratio,
-    'func_added': lambda (i, t): (time.time() - t.time_added) / 86400.0,
+    'func_added': lambda (i, t): (time.time() - t.get_status(['time_added'])['time_added']) / 86400.0,
     'func_seed_time': lambda (i, t):
         t.get_status(['seeding_time'])['seeding_time'] / 86400.0,
     'func_seeders': lambda (i, t): t.get_status(['total_seeds'])['total_seeds']
